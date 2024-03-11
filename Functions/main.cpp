@@ -2,26 +2,43 @@
 #include<iostream>
 using namespace std;
 
-int Sum(int a, int b);
+int Sum(int a, int b); // Прототип функции (объявление функции - Function declaration)
 int Diff(int a, int b);
 int Prod(int a, int b);
 double Quote(int a, int b);
-int Fact(int a);
-int Power(int a, int b);
+long long int Factorial(int a);
+double Power(double a, int b);
+
+//#define CALC
+//#define FACTORIAL
+#define POWER
+
 
 void main()
 {
+    system("CLS");
 	setlocale(LC_ALL, "");
+#ifdef CALC
 	int a, b;
 	cout << "Введите два числа: "; cin >> a >> b;
-	int c = Sum(a, b);
+	int c = Sum(a, b); // Использование функции (Вызов функции - Function call)
 	cout << a << " + " << b << " = " << c << endl;
 	cout << a << " - " << b << " = " << Diff(a, b) << endl;
 	cout << a << " * " << b << " = " << Prod(a, b) << endl;
 	cout << a << " / " << b << " = " << Quote(a, b) << endl;
-    cout << "факториал числа " << a << " = " << Fact(a) << endl;
-    cout << "факториал числа " << b << " = " << Fact(b) << endl;
-    cout << "число " << a << " в степени " << b << " = " << Power(a, b) << endl;
+#endif // CALC
+#ifdef FACTORIAL
+    int n;
+	cout << " Введите число для вычисления факториала: "; cin >> n;
+	cout << Factorial(n) << endl;
+#endif // FACTORIAL
+    int a; // основание степени
+    int n; // основание степени
+    cout << " Введите основание степени: "; cin >> a;
+    cout << " Введите показатель степени: "; cin >> n;
+    cout << a << " ^ " << n << " = " << Power(a, n) << endl;
+    system("PAUSE");
+    main();
 }
 
 int Sum(int a, int b)
@@ -41,22 +58,28 @@ double Quote(int a, int b)
 {
 	return (double)a / b; //Quotient - частное
 }
-int Fact(int n) // Factorial - факториал числа
+long long int Factorial(int n) // Factorial - факториал числа
 {
-    int result = 1;
+    long long int f = 1;
     for (int i = 1; i <= n; i++)
     {
-        result *= i;
+        f *= i;
     }
-    return result;
+    return f;
+
 }
-int Power(int a, int b) //Power - степень числа
+
+double Power(double a, int n) //Power - степень числа
 {
-    int result = 1;
-    for (int i = 0; i < b; i++)
+    double N = 1; // реализация функции (Определение функции - Function definition)
+    if (n < 0)
     {
-        result *= a;
-        result = result;
+        a = 1 / a;
+        n = -n;
     }
-    return result;
+    for (int i = 0; i < n; i++)
+    {
+        N *= a;
+    }
+    return N;
 }
