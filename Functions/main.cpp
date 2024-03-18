@@ -2,7 +2,7 @@
 #include<iostream>
 using namespace std;
 
-int Sum(int a, int b); // Прототип функции (объявление функции - Function declaration)
+int Sum(int a, int b, int c = 0); // Прототип функции (объявление функции - Function declaration)
 int Diff(int a, int b);
 int Prod(int a, int b);
 double Quote(int a, int b);
