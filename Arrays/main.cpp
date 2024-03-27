@@ -21,17 +21,19 @@ double Avg(const double arr[], const int n);
 double Avg(const char arr[], const int n);
 
 int minValueIn(const int arr[], const int n);
-int maxValueIn(const int arr[], const int n);
 int minValueIn(const double arr[], const int n);
-int maxValueIn(const double arr[], const int n);
 int minValueIn(const char arr[], const int n);
+
+int maxValueIn(const int arr[], const int n);
+int maxValueIn(const double arr[], const int n);
 int maxValueIn(const char arr[], const int n);
 
 void shiftleft(int arr[], const int n);
-void shiftRight(int arr[], const int n);
 void shiftleft(double arr[], const int n);
-void shiftRight(double arr[], const int n);
 void shiftleft(char arr[], const int n);
+
+void shiftRight(int arr[], const int n);
+void shiftRight(double arr[], const int n);
 void shiftRight(char arr[], const int n);
 
 void main()
