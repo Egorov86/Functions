@@ -13,7 +13,7 @@ void Print(const double arr[], const int n);
 void Print(const char arr[], const int n);
 
 int Sum(const int arr[], const int n);
-int Sum(const double arr[], const int n);
+double Sum(const double arr[], const int n);
 int Sum(const char arr[], const int n);
 
 double Avg(const int arr[], const int n);
@@ -21,11 +21,11 @@ double Avg(const double arr[], const int n);
 double Avg(const char arr[], const int n);
 
 int minValueIn(const int arr[], const int n);
-int minValueIn(const double arr[], const int n);
+double minValueIn(const double arr[], const int n);
 int minValueIn(const char arr[], const int n);
 
 int maxValueIn(const int arr[], const int n);
-int maxValueIn(const double arr[], const int n);
+double maxValueIn(const double arr[], const int n);
 int maxValueIn(const char arr[], const int n);
 
 void shiftleft(int arr[], const int n);
@@ -41,8 +41,8 @@ void main()
 	setlocale(LC_ALL, "");
 	const int n = 5;
 	int arr[n];
-	/*const int m = 10;
-	char brr[m];*/
+	const int m = 7;
+	double brr[m];
 	/*int minRand, maxRand;
 	do
 	{
@@ -51,7 +51,7 @@ void main()
 		if (minRand == maxRand)cout << "Пределы не должны совпадать" << endl;
 
 	} while (minRand == maxRand);*/
-
+	cout << " Массив типа INT в " << n << " элементов" << endl;
 	FillRand(arr, n);
 	Print(arr, n);
 	cout << "Сумма элементов массива: " << Sum(arr, n) << endl;
@@ -62,9 +62,18 @@ void main()
 	cout  << endl;
 	shiftRight(arr, n);
 	cout << endl;
-	/*FillRand(brr, m);
-	Print(brr, m);*/
-	
+	cout << endl;
+	cout <<" Массив типа DOUBLE в " << m << " элементов" << endl;
+	FillRand(brr, m);
+	Print(brr, m);
+	cout << "Сумма элементов массива: " << Sum(brr, m) << endl;
+	cout << "Среднее-арифметическое элементов массива: " << Avg(brr, m) << endl;
+	cout << "Минимальное значение элементов массива: " << minValueIn(brr, m) << endl;
+	cout << "Максимальное значение элементов массива: " << maxValueIn(brr, m) << endl;
+	shiftleft(brr, m);
+	cout << endl;
+	shiftRight(brr, m);
+	cout << endl;
 }
 
 void FillRand(int arr[], const int n, int maxRand, int minRand)
@@ -146,14 +155,17 @@ int Sum(const int arr[], const int n)
 	}
 	return sum;
 }
-int Sum(const double arr[], const int n)
+double Sum(const double arr[], const int n)
 {
-	int sum = 0;
+	double sum = 0;
 	for (int i = 0; i < n; i++)
 	{
 		sum += arr[i];
 	}
+	sum = sum * 100;
+	sum = double(sum) / 100;
 	return sum;
+	
 }
 int Sum(const char arr[], const int n)
 {
@@ -189,15 +201,16 @@ int minValueIn(const int arr[], const int n)
 	}
 	return min;
 }
-int minValueIn(const double arr[], const int n)
+double minValueIn(const double arr[], const int n)
 {
-	int min = arr[0];
+	double min = arr[0];
 	for (int i = 1; i < n; i++)
 	{
 		if (arr[i] < min)
 			min = arr[i];
-
 	}
+	min = min * 100;
+	min = double(min) / 100;
 	return min;
 }
 int minValueIn(const char arr[], const int n)
@@ -223,15 +236,17 @@ int maxValueIn(const int arr[], const int n)
 	}
 	return max;
 }
-int maxValueIn(const double arr[], const int n)
+double maxValueIn(const double arr[], const int n)
 {
-	int max = arr[0];
+	double max = arr[0];
 	for (int i = 1; i < n; i++)
 	{
 		if (arr[i] > max)
 			max = arr[i];
 
 	}
+	max = max * 100;
+	max = double(max) / 100;
 	return max;
 }
 int maxValueIn(const char arr[], const int n)
@@ -272,7 +287,7 @@ void shiftleft(double arr[], const int n)
 	cout << "На сколько элементов сдвинуть влево массив:"; cin >> number_of_shifts;
 	for (int i = 0; i < number_of_shifts; i++)
 	{
-		int buffer = arr[0];
+		double buffer = arr[0];
 		for (int j = 0; j < n - 1; j++)
 		{
 			arr[j] = arr[j + 1];
@@ -329,7 +344,7 @@ void shiftRight(double arr[], const int n)
 	cout << "На сколько элементов сдвинуть массив вправо:"; cin >> number_of_shifts;
 	for (int i = 0; i < number_of_shifts; i++)
 	{
-		int buffer = arr[n - 1];
+		double buffer = arr[n - 1];
 		for (int i = n - 1; i > 0; i--)
 		{
 			arr[i] = arr[i - 1];
