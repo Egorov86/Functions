@@ -4,9 +4,9 @@ using namespace std;
 
 #define tab "\t"
 #define delimiter "\n---------------------------------------\n"
-//#define INT
-//#define DOUBLE
-//#define CHAR
+#define INT
+#define DOUBLE
+#define CHAR
 
 const int ROWS = 3; // количество строк
 const int COLS = 4; // количество элементов строки
@@ -67,9 +67,15 @@ void shiftRight(int arr[ROWS][COLS], const int ROWS, const int COLS, int number_
 void shiftRight(double arr[ROWS][COLS], const int ROWS, const int COLS, int number_of_shifts);
 void shiftRight(char arr[ROWS][COLS], const int ROWS, const int COLS, int number_of_shifts);
 
+void sort(int arr[], const int n);
+void sort(double arr[], const int n);
+void sort(char arr[], const int n);
+void sort(int arr[ROWS][COLS], const int ROWS, const int COLS);
+
 void main()
 {
 	setlocale(LC_ALL, "");
+	int number_of_shifts;
 	/*int minRand, maxRand;
 	do
 	{
@@ -88,50 +94,60 @@ void main()
 	cout << "Среднее-арифметическое элементов массива: " << Avg(arr, I_SIZE) << endl;
 	cout << "Минимальное значение элементов массива: " << minValueIn(arr, I_SIZE) << endl;
 	cout << "Максимальное значение элементов массива: " << maxValueIn(arr, I_SIZE) << endl;
-	int number_of_shifts;
 	cout << "На сколько элементов сдвинуть влево массив:"; cin >> number_of_shifts;
 	shiftleft(arr, I_SIZE, number_of_shifts);
 	Print(arr, I_SIZE);
 	cout << "На сколько элементов сдвинуть массив вправо:"; cin >> number_of_shifts;
 	shiftRight(arr, I_SIZE, number_of_shifts);
 	Print(arr, I_SIZE);
+	cout << "Сортировка массива по возрастанию:" << endl;
+	sort(arr, I_SIZE);
+	Print(arr, I_SIZE);
 	cout << endl;
 	cout << endl;
 	cout << delimiter << endl;
 #endif //INT
 #ifdef DOUBLE
-	const int D_SIZE = 6;
-	double arr[D_SIZE];
+	const int D_SIZE = 5;
+	double d_arr[D_SIZE];
 	cout << " Массив типа DOUBLE в " << D_SIZE << " элементов" << endl;
-	FillRand(arr, D_SIZE);
-	Print(arr, D_SIZE);
-	cout << "Сумма элементов массива: " << Sum(arr, D_SIZE) << endl;
-	cout << "Среднее-арифметическое элементов массива: " << Avg(arr, D_SIZE) << endl;
-	cout << "Минимальное значение элементов массива: " << minValueIn(arr, D_SIZE) << endl;
-	cout << "Максимальное значение элементов массива: " << maxValueIn(arr, D_SIZE) << endl;
-	int number_of_shifts;
+	FillRand(d_arr, D_SIZE);
+	Print(d_arr, D_SIZE);
+	cout << "Сумма элементов массива: " << Sum(d_arr, D_SIZE) << endl;
+	cout << "Среднее-арифметическое элементов массива: " << Avg(d_arr, D_SIZE) << endl;
+	cout << "Минимальное значение элементов массива: " << minValueIn(d_arr, D_SIZE) << endl;
+	cout << "Максимальное значение элементов массива: " << maxValueIn(d_arr, D_SIZE) << endl;
 	cout << "На сколько элементов сдвинуть влево массив:"; cin >> number_of_shifts;
-	shiftleft(arr, D_SIZE);
-	cout << "На сколько элементов сдвинуть вправо массив:"; cin >> number_of_shifts
-		shiftRight(arr, D_SIZE);
+	shiftleft(d_arr, D_SIZE, number_of_shifts);
+	Print(d_arr, D_SIZE);
+	cout << "На сколько элементов сдвинуть вправо массив:"; cin >> number_of_shifts;
+	shiftRight(d_arr, D_SIZE, number_of_shifts);
+	Print(d_arr, D_SIZE);
 	cout << endl;
+	cout << "Сортировка массива по возрастанию:" << endl;
+	sort(d_arr, D_SIZE);
+	Print(d_arr, D_SIZE);
 	cout << delimiter << endl;
 #endif //DOUBLE
 #ifdef CHAR
-	const int C_SIZE = 6;
-	char arr[C_SIZE];
+	const int C_SIZE = 5;
+	char c_arr[C_SIZE];
 	cout << " Массив типа CHAR в " << C_SIZE << " элементов" << endl;
-	FillRand(arr, C_SIZE);
-	Print(arr, C_SIZE);
-	cout << "Сумма элементов массива: " << Sum(arr, C_SIZE) << endl;
-	cout << "Среднее-арифметическое элементов массива: " << Avg(arr, C_SIZE) << endl;
-	cout << "Минимальное значение элементов массива: " << minValueIn(arr, C_SIZE) << endl;
-	cout << "Максимальное значение элементов массива: " << maxValueIn(arr, C_SIZE) << endl;
-	int number_of_shifts;
+	FillRand(c_arr, C_SIZE);
+	Print(c_arr, C_SIZE);
+	cout << "Сумма элементов массива: " << Sum(c_arr, C_SIZE) << endl;
+	cout << "Среднее-арифметическое элементов массива: " << Avg(c_arr, C_SIZE) << endl;
+	cout << "Минимальное значение элементов массива: " << minValueIn(c_arr, C_SIZE) << endl;
+	cout << "Максимальное значение элементов массива: " << maxValueIn(c_arr, C_SIZE) << endl;
 	cout << "На сколько элементов сдвинуть влево массив:"; cin >> number_of_shifts;
-	shiftleft(arr, C_SIZE, number_of_shifts);
+	shiftleft(c_arr, C_SIZE, number_of_shifts);
+	Print(c_arr, C_SIZE);
 	cout << "На сколько элементов сдвинуть вправо массив:"; cin >> number_of_shifts;
-	shiftRight(arr, C_SIZE, number_of_shifts);
+	shiftRight(c_arr, C_SIZE, number_of_shifts);
+	Print(c_arr, C_SIZE);
+	cout << "Сортировка массива по возрастанию:" << endl;
+	sort(c_arr, C_SIZE);
+	Print(c_arr, C_SIZE);
 	cout << endl;
 	cout << delimiter << endl;
 #endif //CHAR
@@ -146,12 +162,14 @@ void main()
 	cout << "Среднее-арифметическое элементов двумерного int массива: " << Avg(i_arr_2, ROWS, COLS) << endl;
 	cout << "Минимальное значение элементов двумерного int массива: " << minValueIn(i_arr_2, ROWS, COLS) << endl;
 	cout << "Максимальное значение элементов двумерного int массива: " << maxValueIn(i_arr_2, ROWS, COLS) << endl;
-	int number_of_shifts;
 	cout << "На сколько элементов сдвинуть влево массив:"; cin >> number_of_shifts;
 	shiftleft(i_arr_2, ROWS, COLS, number_of_shifts);
 	Print(i_arr_2, ROWS, COLS);
 	cout << "На сколько элементов сдвинуть вправо массив:"; cin >> number_of_shifts;
 	shiftRight(i_arr_2, ROWS, COLS, number_of_shifts);
+	Print(i_arr_2, ROWS, COLS);
+	cout << "Сортировка массива по возрастанию:" << endl;
+	sort(i_arr_2, ROWS, COLS);
 	Print(i_arr_2, ROWS, COLS);
 
 	cout << delimiter << endl;
@@ -726,3 +744,132 @@ void shiftRight(char arr[ROWS][COLS], const int ROWS, const int COLS, int number
 {
 	shiftleft(arr, ROWS, COLS, ROWS * COLS - number_of_shifts);
 }
+
+void sort(int arr[], const int n)
+{
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < n - 1; j++)
+		{
+			if (arr[j] > arr[j + 1])
+			{
+				int k;
+				k = arr[j];
+				arr[j] = arr[j + 1];
+				arr[j + 1] = k;
+
+			}
+		}
+	}
+	
+}
+void sort(double arr[], const int n)
+{
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < n-1; j++)
+		{
+			if (arr[j] > arr[j + 1])
+			{
+				double k;
+				k = arr[j];
+				arr[j] = arr[j + 1];
+				arr[j + 1] = k;
+
+			}
+		}
+	}
+}
+void sort(char arr[], const int n)
+{
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < n - 1; j++)
+		{
+			if (arr[j] > arr[j + 1])
+			{
+				char k;
+				k = arr[j];
+				arr[j] = arr[j + 1];
+				arr[j + 1] = k;
+
+			}
+		}
+	}
+}
+void sort(int arr[ROWS][COLS], const int ROWS, const int COLS)
+{
+   for (int k = 0; k < ROWS; k++)
+   {
+		for (int b = 0; b < COLS; b++)
+		{
+			for (int i = 0; i < ROWS; i++)
+			{
+				for (int j = 0; j < COLS; j++)
+				{
+					if (j + 1 == ROWS and arr[i][j] > arr[i + 1][0])
+					{
+						int buffer = arr[i][j];
+						arr[i][j] = arr[i + 1][0];
+						arr[i + 1][0] = buffer;
+					}
+					else if (arr[i][j] > arr[i][j + 1])
+					{
+						int buffer = arr[i][j];
+						arr[i][j] = arr[i][j + 1];
+						arr[i][j + 1] = buffer;
+					}
+				}
+			}
+		}
+   }
+}
+/*{
+	for (int i = 0; i < ROWS; i++) // cортирует только строки
+	{
+		for (int j = 0; j < COLS; j++)
+		{
+			for (int k = 0; k < COLS - j - 1; k++)
+			{
+				if (arr[i][k] > arr[i][k + 1])
+				{
+					int buffer = arr[i][k];
+					arr[i][k] = arr[i][k + 1];
+					arr[i][k + 1] = buffer;
+				}
+			}
+		}
+	}
+}
+{
+	for (int i = 0; i < ROWS; i++) // сортировка строк
+	{
+		for (int j = 0; j < COLS; j++)
+		{
+			for (int k = 0; k < COLS-1; k++)
+			{
+				if (arr[i][k] > arr[i][k + 1])
+				{
+					int buffer = arr[i][k + 1];
+					arr[i][k + 1] = arr[i][k];
+					arr[i][k] = buffer;
+				}
+			}
+		}
+	}
+	for (int i = 0; i < COLS; i++)  // сортировка столбцов
+	{
+		for (int j = 0; j < ROWS; j++)
+		{
+			for (int k = 0; k < ROWS-1; k++)
+			{
+				if (arr[k][i] > arr[k + 1][i])
+				{
+					int buffer = arr[k + 1][i];
+					arr[k + 1][i] = arr[k][i];
+					arr[k][i] = buffer;
+				}
+			}
+		}
+	}
+}*/
