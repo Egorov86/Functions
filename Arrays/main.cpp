@@ -67,10 +67,12 @@ void shiftRight(int arr[ROWS][COLS], const int ROWS, const int COLS, int number_
 void shiftRight(double arr[ROWS][COLS], const int ROWS, const int COLS, int number_of_shifts);
 void shiftRight(char arr[ROWS][COLS], const int ROWS, const int COLS, int number_of_shifts);
 
-void sort(int arr[], const int n);
-void sort(double arr[], const int n);
-void sort(char arr[], const int n);
-void sort(int arr[ROWS][COLS], const int ROWS, const int COLS);
+void Sort(int arr[], const int n);
+void Sort(double arr[], const int n);
+void Sort(char arr[], const int n);
+void Sort(int arr[ROWS][COLS], const int ROWS, const int COLS);
+void Sort(double arr[ROWS][COLS], const int ROWS, const int COLS);
+void Sort(char arr[ROWS][COLS], const int ROWS, const int COLS);
 
 void main()
 {
@@ -101,7 +103,7 @@ void main()
 	shiftRight(arr, I_SIZE, number_of_shifts);
 	Print(arr, I_SIZE);
 	cout << "Сортировка массива по возрастанию:" << endl;
-	sort(arr, I_SIZE);
+	Sort(arr, I_SIZE);
 	Print(arr, I_SIZE);
 	cout << endl;
 	cout << endl;
@@ -125,7 +127,7 @@ void main()
 	Print(d_arr, D_SIZE);
 	cout << endl;
 	cout << "Сортировка массива по возрастанию:" << endl;
-	sort(d_arr, D_SIZE);
+	Sort(d_arr, D_SIZE);
 	Print(d_arr, D_SIZE);
 	cout << delimiter << endl;
 #endif //DOUBLE
@@ -146,7 +148,7 @@ void main()
 	shiftRight(c_arr, C_SIZE, number_of_shifts);
 	Print(c_arr, C_SIZE);
 	cout << "Сортировка массива по возрастанию:" << endl;
-	sort(c_arr, C_SIZE);
+	Sort(c_arr, C_SIZE);
 	Print(c_arr, C_SIZE);
 	cout << endl;
 	cout << delimiter << endl;
@@ -169,7 +171,7 @@ void main()
 	shiftRight(i_arr_2, ROWS, COLS, number_of_shifts);
 	Print(i_arr_2, ROWS, COLS);
 	cout << "Сортировка массива по возрастанию:" << endl;
-	sort(i_arr_2, ROWS, COLS);
+	Sort(i_arr_2, ROWS, COLS);
 	Print(i_arr_2, ROWS, COLS);
 
 	cout << delimiter << endl;
@@ -188,6 +190,9 @@ void main()
 	cout << "На сколько элементов сдвинуть вправо массив:"; cin >> number_of_shifts;
 	shiftRight(d_arr_2, ROWS, COLS, number_of_shifts);
 	Print(d_arr_2, ROWS, COLS);
+	cout << "Сортировка массива по возрастанию:" << endl;
+	Sort(d_arr_2, ROWS, COLS);
+	Print(d_arr_2, ROWS, COLS);
 	cout << delimiter << endl;
 
 	cout << " Двумерный CHAR массив " << ROWS << " на " << COLS << " элементов" << endl;
@@ -203,6 +208,9 @@ void main()
 	Print(c_arr_2, ROWS, COLS);
 	cout << "На сколько элементов сдвинуть вправо массив:"; cin >> number_of_shifts;
 	shiftRight(c_arr_2, ROWS, COLS, number_of_shifts);
+	Print(c_arr_2, ROWS, COLS);
+	cout << "Сортировка массива по возрастанию:" << endl;
+	Sort(c_arr_2, ROWS, COLS);
 	Print(c_arr_2, ROWS, COLS);
 	cout << delimiter << endl;
 
@@ -745,102 +753,55 @@ void shiftRight(char arr[ROWS][COLS], const int ROWS, const int COLS, int number
 	shiftleft(arr, ROWS, COLS, ROWS * COLS - number_of_shifts);
 }
 
-void sort(int arr[], const int n)
+void Sort(int arr[], const int n)
 {
-	for (int i = 0; i < n; i++)
+	for (int i = 0; i < n; i++) // счетчик "i" выбирает элемент массива, 
+		//в который будет помещено минимальное значение из всех перебираемых.
 	{
-		for (int j = 0; j < n - 1; j++)
+		for (int j = i+1; j < n; j++) // счётчик "j" перебирает оставшиеся элементы массива.
 		{
-			if (arr[j] > arr[j + 1])
+			if (arr[i] < arr[j]) // arr[i] - выбранный элемент // arr[j] - перебираемый элемент
 			{
-				int k;
-				k = arr[j];
-				arr[j] = arr[j + 1];
-				arr[j + 1] = k;
-
-			}
-		}
-	}
-	
-}
-void sort(double arr[], const int n)
-{
-	for (int i = 0; i < n; i++)
-	{
-		for (int j = 0; j < n-1; j++)
-		{
-			if (arr[j] > arr[j + 1])
-			{
-				double k;
-				k = arr[j];
-				arr[j] = arr[j + 1];
-				arr[j + 1] = k;
-
+				int buffer = arr[j];
+				arr[j] = arr[i];
+				arr[i] = buffer;
 			}
 		}
 	}
 }
-void sort(char arr[], const int n)
+void Sort(double arr[], const int n)
 {
 	for (int i = 0; i < n; i++)
 	{
-		for (int j = 0; j < n - 1; j++)
+		for (int j = i+1; j < n; j++)
 		{
-			if (arr[j] > arr[j + 1])
+			if (arr[i] < arr[j])
 			{
-				char k;
-				k = arr[j];
-				arr[j] = arr[j + 1];
-				arr[j + 1] = k;
+				double buffer = arr[j];
+				arr[j] = arr[i];
+				arr[i] = buffer;
 
 			}
 		}
 	}
 }
-void sort(int arr[ROWS][COLS], const int ROWS, const int COLS)
+void Sort(char arr[], const int n)
 {
-   for (int k = 0; k < ROWS; k++)
-   {
-		for (int b = 0; b < COLS; b++)
-		{
-			for (int i = 0; i < ROWS; i++)
-			{
-				for (int j = 0; j < COLS; j++)
-				{
-					if (j + 1 == ROWS and arr[i][j] > arr[i + 1][0])
-					{
-						int buffer = arr[i][j];
-						arr[i][j] = arr[i + 1][0];
-						arr[i + 1][0] = buffer;
-					}
-					else if (arr[i][j] > arr[i][j + 1])
-					{
-						int buffer = arr[i][j];
-						arr[i][j] = arr[i][j + 1];
-						arr[i][j + 1] = buffer;
-					}
-				}
-			}
-		}
-   }
-}
-/*{
-	for (int i = 0; i < ROWS; i++) // cортирует только строки
+	for (int i = 0; i < n; i++)
 	{
-		for (int j = 0; j < COLS; j++)
+		for (int j = i+1; j < n; j++)
 		{
-			for (int k = 0; k < COLS - j - 1; k++)
+			if (arr[i] < arr[j])
 			{
-				if (arr[i][k] > arr[i][k + 1])
-				{
-					int buffer = arr[i][k];
-					arr[i][k] = arr[i][k + 1];
-					arr[i][k + 1] = buffer;
-				}
+				char buffer = arr[j];
+				arr[j] = arr[i];
+				arr[i] = buffer;
+
 			}
 		}
 	}
 }
+void Sort(int arr[ROWS][COLS], const int ROWS, const int COLS)
 {
 	for (int i = 0; i < ROWS; i++) // сортировка строк
 	{
@@ -872,4 +833,70 @@ void sort(int arr[ROWS][COLS], const int ROWS, const int COLS)
 			}
 		}
 	}
-}*/
+}
+void Sort(double arr[ROWS][COLS], const int ROWS, const int COLS)
+{
+	for (int i = 0; i < ROWS; i++) // сортировка строк
+	{
+		for (int j = 0; j < COLS; j++)
+		{
+			for (int k = 0; k < COLS - 1; k++)
+			{
+				if (arr[i][k] > arr[i][k + 1])
+				{
+					double buffer = arr[i][k + 1];
+					arr[i][k + 1] = arr[i][k];
+					arr[i][k] = buffer;
+				}
+			}
+		}
+	}
+	for (int i = 0; i < COLS; i++)  // сортировка столбцов
+	{
+		for (int j = 0; j < ROWS; j++)
+		{
+			for (int k = 0; k < ROWS - 1; k++)
+			{
+				if (arr[k][i] > arr[k + 1][i])
+				{
+					double buffer = arr[k + 1][i];
+					arr[k + 1][i] = arr[k][i];
+					arr[k][i] = buffer;
+				}
+			}
+		}
+	}
+}
+void Sort(char arr[ROWS][COLS], const int ROWS, const int COLS)
+{
+	for (int i = 0; i < ROWS; i++) // сортировка строк
+	{
+		for (int j = 0; j < COLS; j++)
+		{
+			for (int k = 0; k < COLS - 1; k++)
+			{
+				if (arr[i][k] > arr[i][k + 1])
+				{
+					char buffer = arr[i][k + 1];
+					arr[i][k + 1] = arr[i][k];
+					arr[i][k] = buffer;
+				}
+			}
+		}
+	}
+	for (int i = 0; i < COLS; i++)  // сортировка столбцов
+	{
+		for (int j = 0; j < ROWS; j++)
+		{
+			for (int k = 0; k < ROWS - 1; k++)
+			{
+				if (arr[k][i] > arr[k + 1][i])
+				{
+					char buffer = arr[k + 1][i];
+					arr[k + 1][i] = arr[k][i];
+					arr[k][i] = buffer;
+				}
+			}
+		}
+	}
+}
