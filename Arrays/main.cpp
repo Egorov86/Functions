@@ -81,6 +81,8 @@ void Unique(int arr[], const int n);
 void Unique(double arr[], const int n);
 void Unique(char arr[], const int n);
 void Unique(int arr[ROWS][COLS], const int ROWS, const int COLS);
+void Unique(double arr[ROWS][COLS], const int ROWS, const int COLS);
+void Unique(char arr[ROWS][COLS], const int ROWS, const int COLS);
 
 void main()
 {
@@ -189,6 +191,9 @@ void main()
 	cout << "Сортировка массива по возрастанию:" << endl;
 	Sort(i_arr_2, ROWS, COLS);
 	Print(i_arr_2, ROWS, COLS);
+	cout << "Двумерный массив типа INT заполненный уникальными случайными числами::" << endl;
+	Unique(i_arr_2, ROWS, COLS);
+	Print(i_arr_2, ROWS, COLS);
 	cout << delimiter << endl;
 
 	cout << " Двумерный DOUBLE массив " << ROWS << " на " << COLS << " элементов" << endl;
@@ -208,6 +213,9 @@ void main()
 	cout << "Сортировка массива по возрастанию:" << endl;
 	Sort(d_arr_2, ROWS, COLS);
 	Print(d_arr_2, ROWS, COLS);
+	cout << "Двумерный массив типа DOUBLE заполненный уникальными случайными числами::" << endl;
+	Unique(d_arr_2, ROWS, COLS);
+	Print(d_arr_2, ROWS, COLS);
 	cout << delimiter << endl;
 
 	cout << " Двумерный CHAR массив " << ROWS << " на " << COLS << " элементов" << endl;
@@ -226,6 +234,9 @@ void main()
 	Print(c_arr_2, ROWS, COLS);
 	cout << "Сортировка массива по возрастанию :" << endl;
 	Sort(c_arr_2, ROWS, COLS);
+	Print(c_arr_2, ROWS, COLS);
+	cout << "Двумерный массив типа CHAR заполненный уникальными случайными числами::" << endl;
+	Unique(c_arr_2, ROWS, COLS);
 	Print(c_arr_2, ROWS, COLS);
 	cout << delimiter << endl;
 
@@ -901,7 +912,7 @@ void Unique(int arr[], const int n)
 		{
 			arr[i] = rand() % n;
 			unique = true;
-			for (int j = 0; j < i; i++)
+			for (int j = 0; j < i; j++)
 			{
 				if (arr[i] == arr[j])
 				{
@@ -909,7 +920,7 @@ void Unique(int arr[], const int n)
 					break;
 				}
 			}
-		} while (!unique);
+		}while (!unique);
 		iterations++;
 	}
 	cout << "кол-во итерации - " << iterations << "\n";
@@ -922,9 +933,11 @@ void Unique(double arr[], const int n)
 		bool unique;
 		do
 		{
-			arr[i] = rand() % n;
+			arr[i] = double (rand() % n);
+			arr[i] *= 100;
+			arr[i] = double (arr[i]) * 0.01;
 			unique = true;
-			for (int j = 0; j < i; i++)
+			for (int j = 0; j < i; j++)
 			{
 				if (arr[i] == arr[j])
 				{
@@ -945,9 +958,9 @@ void Unique(char arr[], const int n)
 		bool unique;
 		do
 		{
-			arr[i] = rand() % n;
+			arr[i] = 'A' + rand() % n;
 			unique = true;
-			for (int j = 0; j < i; i++)
+			for (int j = 0; j < i; j++)
 			{
 				if (arr[i] == arr[j])
 				{
@@ -960,7 +973,7 @@ void Unique(char arr[], const int n)
 	}
 	cout << "кол-во итерации - " << iterations << "\n";
 }
-void Unique(char arr[ROWS][COLS], const int ROWS, const int COLS)
+void Unique(int arr[ROWS][COLS], const int ROWS, const int COLS)
 {
 	for (int i = 0; i < ROWS; i++)
 	{
@@ -982,6 +995,64 @@ void Unique(char arr[ROWS][COLS], const int ROWS, const int COLS)
 						}
 					}
 					if(!unique)break;
+				}
+
+			} while (!unique);
+		}
+	}
+}
+void Unique(double arr[ROWS][COLS], const int ROWS, const int COLS)
+{
+	for (int i = 0; i < ROWS; i++)
+	{
+		for (int j = 0; j < COLS; j++)
+		{
+			bool unique;
+			do
+			{
+				arr[i][j] = rand() % ROWS * COLS;
+				arr[i][j] *= 100;
+				arr[i][j] = (double)arr[i][j] * 0.01;
+				unique = true;
+				for (int k = 0; k <= i; k++)
+				{
+					for (int l = 0; l < (k == i ? j : COLS); i++)
+					{
+						if (arr[i][j] == arr[k][l])
+						{
+							unique = false;
+							break;
+						}
+					}
+					if (!unique)break;
+				}
+
+			} while (!unique);
+		}
+	}
+}
+void Unique(char arr[ROWS][COLS], const int ROWS, const int COLS)
+{
+	for (int i = 0; i < ROWS; i++)
+	{
+		for (int j = 0; j < COLS; j++)
+		{
+			bool unique;
+			do
+			{
+				arr[i][j] = 'A'+rand() % ROWS * COLS;
+				unique = true;
+				for (int k = 0; k <= i; k++)
+				{
+					for (int l = 0; l < (k == i ? j : COLS); i++)
+					{
+						if (arr[i][j] == arr[k][l])
+						{
+							unique = false;
+							break;
+						}
+					}
+					if (!unique)break;
 				}
 
 			} while (!unique);
