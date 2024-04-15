@@ -1,6 +1,9 @@
 ﻿//Arrays
 #include<iostream>
 using namespace std;
+using std::cout;
+using std::cin;
+using std::endl;
 
 #define tab "\t"
 #define delimiter "\n---------------------------------------\n"
@@ -74,6 +77,9 @@ void Sort(int arr[ROWS][COLS], const int ROWS, const int COLS);
 void Sort(double arr[ROWS][COLS], const int ROWS, const int COLS);
 void Sort(char arr[ROWS][COLS], const int ROWS, const int COLS);
 
+void Unique(int arr[], const int n);
+void Unique(double arr[], const int n);
+
 void main()
 {
 	setlocale(LC_ALL, "");
@@ -87,7 +93,7 @@ void main()
 
 	} while (minRand == maxRand);*/
 #ifdef INT
-	const int I_SIZE = 5;
+	const int I_SIZE = 10;
 	int arr[I_SIZE];
 	cout << " Массив типа INT в " << I_SIZE << " элементов" << endl;
 	FillRand(arr, I_SIZE);
@@ -102,10 +108,12 @@ void main()
 	cout << "На сколько элементов сдвинуть массив вправо:"; cin >> number_of_shifts;
 	shiftRight(arr, I_SIZE, number_of_shifts);
 	Print(arr, I_SIZE);
-	cout << "Сортировка массива по возрастанию:" << endl;
+	cout << "Сортировка массива по убыванию:" << endl;
 	Sort(arr, I_SIZE);
 	Print(arr, I_SIZE);
-	cout << endl;
+	cout << "Массив типа INT заполненный уникальными случайными числами:" << endl;
+	Unique(arr, I_SIZE);
+	Print(arr, I_SIZE);
 	cout << endl;
 	cout << delimiter << endl;
 #endif //INT
@@ -126,8 +134,11 @@ void main()
 	shiftRight(d_arr, D_SIZE, number_of_shifts);
 	Print(d_arr, D_SIZE);
 	cout << endl;
-	cout << "Сортировка массива по возрастанию:" << endl;
+	cout << "Сортировка массива по убыванию:" << endl;
 	Sort(d_arr, D_SIZE);
+	Print(d_arr, D_SIZE);
+	cout << "Массив типа DOUBLE заполненный уникальными случайными числами:" << endl;
+	Unique(d_arr, D_SIZE);
 	Print(d_arr, D_SIZE);
 	cout << delimiter << endl;
 #endif //DOUBLE
@@ -147,7 +158,7 @@ void main()
 	cout << "На сколько элементов сдвинуть вправо массив:"; cin >> number_of_shifts;
 	shiftRight(c_arr, C_SIZE, number_of_shifts);
 	Print(c_arr, C_SIZE);
-	cout << "Сортировка массива по возрастанию:" << endl;
+	cout << "Сортировка массива по убыванию:" << endl;
 	Sort(c_arr, C_SIZE);
 	Print(c_arr, C_SIZE);
 	cout << endl;
@@ -173,7 +184,6 @@ void main()
 	cout << "Сортировка массива по возрастанию:" << endl;
 	Sort(i_arr_2, ROWS, COLS);
 	Print(i_arr_2, ROWS, COLS);
-
 	cout << delimiter << endl;
 
 	cout << " Двумерный DOUBLE массив " << ROWS << " на " << COLS << " элементов" << endl;
@@ -209,7 +219,7 @@ void main()
 	cout << "На сколько элементов сдвинуть вправо массив:"; cin >> number_of_shifts;
 	shiftRight(c_arr_2, ROWS, COLS, number_of_shifts);
 	Print(c_arr_2, ROWS, COLS);
-	cout << "Сортировка массива по возрастанию:" << endl;
+	cout << "Сортировка массива по возрастанию :" << endl;
 	Sort(c_arr_2, ROWS, COLS);
 	Print(c_arr_2, ROWS, COLS);
 	cout << delimiter << endl;
@@ -803,100 +813,104 @@ void Sort(char arr[], const int n)
 }
 void Sort(int arr[ROWS][COLS], const int ROWS, const int COLS)
 {
-	for (int i = 0; i < ROWS; i++) // сортировка строк
+	int iterations = 0;
+	int exchanges = 0;
+	for (int i = 0; i < ROWS; i++) //выбирает элемент массива в строке
 	{
-		for (int j = 0; j < COLS; j++)
+		for (int j = 0; j < COLS; j++) //выбирает элемент массива в элементе строки
 		{
-			for (int k = 0; k < COLS-1; k++)
+			for (int k = i; k < ROWS; k++) // эти два цикла перебирает оставшиеся элементы в поиске минимального значения
 			{
-				if (arr[i][k] > arr[i][k + 1])
+				for (int l = k == i ? j + 1 : 0; l < COLS; l++)
 				{
-					int buffer = arr[i][k + 1];
-					arr[i][k + 1] = arr[i][k];
-					arr[i][k] = buffer;
+					iterations++;
+					//if (k == i && l == 0)l = j + 1;
+					//if (l == COLS)break;
+					//arr[i][j] - выбранный элемент
+					//arr[k][l] - перебираемый элемент
+					if (arr[i][j] > arr[k][l])
+					{
+						int buffer = arr[i][j];
+						arr[i][j] = arr[k][l];
+						arr[k][l] = buffer;
+						exchanges++;
+					}
 				}
 			}
 		}
 	}
-	for (int i = 0; i < COLS; i++)  // сортировка столбцов
-	{
-		for (int j = 0; j < ROWS; j++)
-		{
-			for (int k = 0; k < ROWS-1; k++)
-			{
-				if (arr[k][i] > arr[k + 1][i])
-				{
-					int buffer = arr[k + 1][i];
-					arr[k + 1][i] = arr[k][i];
-					arr[k][i] = buffer;
-				}
-			}
-		}
-	}
+	cout << "кол-во итерации - " <<iterations<<"\n";
+	cout << "кол-во замен - " << exchanges<<"\n";
 }
 void Sort(double arr[ROWS][COLS], const int ROWS, const int COLS)
 {
-	for (int i = 0; i < ROWS; i++) // сортировка строк
-	{
-		for (int j = 0; j < COLS; j++)
-		{
-			for (int k = 0; k < COLS - 1; k++)
-			{
-				if (arr[i][k] > arr[i][k + 1])
-				{
-					double buffer = arr[i][k + 1];
-					arr[i][k + 1] = arr[i][k];
-					arr[i][k] = buffer;
+	int iterations = 0;
+	int exchanges = 0;
+	for (int i = 0; i < ROWS; i++){
+		for (int j = 0; j < COLS; j++) {
+			for (int k = i; k < ROWS; k++){
+				for (int l = k == i ? j + 1 : 0; l < COLS; l++){
+					iterations++;
+					if (arr[i][j] > arr[k][l]){
+						double buffer = arr[i][j];
+						arr[i][j] = arr[k][l];
+						arr[k][l] = buffer;
+						exchanges++;
+					}
 				}
 			}
 		}
 	}
-	for (int i = 0; i < COLS; i++)  // сортировка столбцов
-	{
-		for (int j = 0; j < ROWS; j++)
-		{
-			for (int k = 0; k < ROWS - 1; k++)
-			{
-				if (arr[k][i] > arr[k + 1][i])
-				{
-					double buffer = arr[k + 1][i];
-					arr[k + 1][i] = arr[k][i];
-					arr[k][i] = buffer;
-				}
-			}
-		}
-	}
+	cout << "кол-во итерации - " << iterations << "\n";
+	cout << "кол-во замен - " << exchanges << "\n";
 }
 void Sort(char arr[ROWS][COLS], const int ROWS, const int COLS)
 {
-	for (int i = 0; i < ROWS; i++) // сортировка строк
-	{
-		for (int j = 0; j < COLS; j++)
-		{
-			for (int k = 0; k < COLS - 1; k++)
-			{
-				if (arr[i][k] > arr[i][k + 1])
-				{
-					char buffer = arr[i][k + 1];
-					arr[i][k + 1] = arr[i][k];
-					arr[i][k] = buffer;
+	int iterations = 0;
+	int exchanges = 0;
+	for (int i = 0; i < ROWS; i++) {
+		for (int j = 0; j < COLS; j++) {
+			for (int k = i; k < ROWS; k++) {
+				for (int l = k == i ? j + 1 : 0; l < COLS; l++) {
+					iterations++;
+					if (arr[i][j] > arr[k][l]) {
+						char buffer = arr[i][j];
+						arr[i][j] = arr[k][l];
+						arr[k][l] = buffer;
+						exchanges++;
+					}
 				}
 			}
 		}
 	}
-	for (int i = 0; i < COLS; i++)  // сортировка столбцов
+	cout << "кол-во итерации - " << iterations << "\n";
+	cout << "кол-во замен - " << exchanges << "\n";
+}
+void Unique(int arr[], const int n)
+{ 
+	int iterations = 0;
+	for (int i = n-1; i >0; --i)
 	{
-		for (int j = 0; j < ROWS; j++)
+		int j = rand() % n;
+		for (int i = 0; i <n; i++)
 		{
-			for (int k = 0; k < ROWS - 1; k++)
-			{
-				if (arr[k][i] > arr[k + 1][i])
-				{
-					char buffer = arr[k + 1][i];
-					arr[k + 1][i] = arr[k][i];
-					arr[k][i] = buffer;
-				}
-			}
+			iterations++;
+			arr[i] = i + 1;
 		}
 	}
+	cout << "кол-во итерации - " << iterations << "\n";
+}
+void Unique(double arr[], const int n)
+{
+	int iterations = 0.0;
+	for (int i = n - 1; i > 0; --i)
+	{
+		double j = rand() % n;
+		for (int i = 0; i < n; i++)
+		{
+			iterations++;
+			arr[i] = i + 1;
+		}
+	}
+	cout << "кол-во итерации - " << iterations << "\n";
 }
