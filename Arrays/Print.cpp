@@ -1,0 +1,61 @@
+//Print.cpp
+#include"Print.h"
+void Print(const int i_arr[], const int n)
+{
+	for (int i = 0; i < n; i++)
+	{
+		cout << i_arr[i] << tab;
+	}
+	cout << endl;
+}
+void Print(const double i_arr[], const int n)
+{
+	for (int i = 0; i < n; i++)
+	{
+		cout << i_arr[i] << tab;
+	}
+	cout << endl;
+}
+void Print(const char i_arr[], const int n)
+{
+	for (int i = 0; i < n; i++)
+	{
+		cout << i_arr[i] << tab;
+	}
+	cout << endl;
+}
+void Print(const int arr[ROWS][COLS], const int ROWS, const int COLS)
+{
+	for (int i = 0; i < ROWS; i++)
+	{
+		for (int j = 0; j < COLS; j++)
+		{
+			cout << arr[i][j] << tab;
+		}
+		cout << endl;
+	}
+
+}
+void Print(const double d_arr_2[ROWS][COLS], const int ROWS, const int COLS)
+{
+	for (int i = 0; i < ROWS; i++)
+	{
+		for (int j = 0; j < COLS; j++)
+		{
+			cout << d_arr_2[i][j] << tab;
+		}
+		cout << endl;
+	}
+}
+void Print(const char arr[ROWS][COLS], const int ROWS, const int COLS)
+{
+	for (int i = 0; i < ROWS; i++)
+	{
+		for (int j = 0; j < COLS; j++)
+		{
+			cout << arr[i][j] << tab;
+		}
+		cout << endl;
+	}
+
+}
