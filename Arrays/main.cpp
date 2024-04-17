@@ -20,27 +20,17 @@ void FillRand(char arr[], const int n);
 void FillRand(int arr[ROWS][COLS], const int ROWS, const int COLS, int minRand = 0, int maxRand = 100);
 void FillRand(double arr[ROWS][COLS], const int ROWS, const int COLS, int minRand = 0, int maxRand = 100);
 void FillRand(char arr[ROWS][COLS], const int ROWS, const int COLS, int minRand = 0, int maxRand = 100);
+//template - создаёт шаблон
+//typename - создаёт шаблонный тип данных
+//T - имя шаблонного типа
+template<typename T>
+void Print(const T arr[], const int n);
 
-void Print(const int arr[], const int n);
-void Print(const double arr[], const int n);
-void Print(const char arr[], const int n);
-void Print(const int arr[ROWS][COLS], const int ROWS, const int COLS);
-void Print(const double arr[ROWS][COLS], const int ROWS, const int COLS);
-void Print(const char arr[ROWS][COLS], const int ROWS, const int COLS);
+template<typename T>
+T Sum(const T arr[], const int n);
 
-int Sum(const int arr[], const int n);
-double Sum(const double arr[], const int n);
-int Sum(const char arr[], const int n);
-int Sum(const int arr[ROWS][COLS], const int ROWS, const int COLS);
-double Sum(const double arr[ROWS][COLS], const int ROWS, const int COLS);
-int Sum(const char arr[ROWS][COLS], const int ROWS, const int COLS);
-
+//template<typename T>
 double Avg(const int arr[], const int n);
-double Avg(const double arr[], const int n);
-double Avg(const char arr[], const int n);
-double Avg(const int arr[ROWS][COLS], const int ROWS, const int COLS);
-double Avg(const double arr[ROWS][COLS], const int ROWS, const int COLS);
-double Avg(const char arr[ROWS][COLS], const int ROWS, const int COLS);
 
 int minValueIn(const int arr[], const int n);
 double minValueIn(const double arr[], const int n);
@@ -127,6 +117,7 @@ void main()
 	cout << " Массив типа DOUBLE в " << D_SIZE << " элементов" << endl;
 	FillRand(d_arr, D_SIZE);
 	Print(d_arr, D_SIZE);
+	cout<< "Сумма элементов массива: " << Sum(d_arr, D_SIZE) << endl;
 	cout << "Сумма элементов массива: " << Sum(d_arr, D_SIZE) << endl;
 	cout << "Среднее-арифметическое элементов массива: " << Avg(d_arr, D_SIZE) << endl;
 	cout << "Минимальное значение элементов массива: " << minValueIn(d_arr, D_SIZE) << endl;
@@ -151,23 +142,18 @@ void main()
 	char c_arr[C_SIZE];
 	cout << " Массив типа CHAR в " << C_SIZE << " элементов" << endl;
 	FillRand(c_arr, C_SIZE);
-	Print(c_arr, C_SIZE);
 	cout << "Сумма элементов массива: " << Sum(c_arr, C_SIZE) << endl;
 	cout << "Среднее-арифметическое элементов массива: " << Avg(c_arr, C_SIZE) << endl;
 	cout << "Минимальное значение элементов массива: " << minValueIn(c_arr, C_SIZE) << endl;
 	cout << "Максимальное значение элементов массива: " << maxValueIn(c_arr, C_SIZE) << endl;
 	cout << "На сколько элементов сдвинуть влево массив:"; cin >> number_of_shifts;
 	shiftleft(c_arr, C_SIZE, number_of_shifts);
-	Print(c_arr, C_SIZE);
 	cout << "На сколько элементов сдвинуть вправо массив:"; cin >> number_of_shifts;
 	shiftRight(c_arr, C_SIZE, number_of_shifts);
-	Print(c_arr, C_SIZE);
 	cout << "Сортировка массива по убыванию:" << endl;
 	Sort(c_arr, C_SIZE);
-	Print(c_arr, C_SIZE);
 	cout << "Массив типа CHAR заполненный уникальными случайными числами:" << endl;
 	Unique(c_arr, C_SIZE);
-	Print(c_arr, C_SIZE);
 	cout << endl;
 	cout << delimiter << endl;
 #endif //CHAR
@@ -177,67 +163,52 @@ void main()
 	cout << " Двумерный INT массив " << ROWS << " на " << COLS << " элементов" << endl;
 	// Вывод двумерного (int) массива на экран:
 	FillRand(i_arr_2, ROWS, COLS);
-	Print(i_arr_2, ROWS, COLS);
 	cout << "Сумма элементов двумерного int массива: " << Sum(i_arr_2, ROWS, COLS) << endl;
 	cout << "Среднее-арифметическое элементов двумерного int массива: " << Avg(i_arr_2, ROWS, COLS) << endl;
 	cout << "Минимальное значение элементов двумерного int массива: " << minValueIn(i_arr_2, ROWS, COLS) << endl;
 	cout << "Максимальное значение элементов двумерного int массива: " << maxValueIn(i_arr_2, ROWS, COLS) << endl;
 	cout << "На сколько элементов сдвинуть влево массив:"; cin >> number_of_shifts;
 	shiftleft(i_arr_2, ROWS, COLS, number_of_shifts);
-	Print(i_arr_2, ROWS, COLS);
 	cout << "На сколько элементов сдвинуть вправо массив:"; cin >> number_of_shifts;
 	shiftRight(i_arr_2, ROWS, COLS, number_of_shifts);
-	Print(i_arr_2, ROWS, COLS);
 	cout << "Сортировка массива по возрастанию:" << endl;
 	Sort(i_arr_2, ROWS, COLS);
-	Print(i_arr_2, ROWS, COLS);
 	cout << "Двумерный массив типа INT заполненный уникальными случайными числами::" << endl;
 	Unique(i_arr_2, ROWS, COLS);
-	Print(i_arr_2, ROWS, COLS);
 	cout << delimiter << endl;
 
 	cout << " Двумерный DOUBLE массив " << ROWS << " на " << COLS << " элементов" << endl;
 	// Вывод двумерного (doble) массива на экран :
 	FillRand(d_arr_2, ROWS, COLS);
-	Print(d_arr_2, ROWS, COLS);
 	cout << "Сумма элементов двумерного double массива: " << Sum(d_arr_2, ROWS, COLS) << endl;
 	cout << "Среднее-арифметическое элементов двумерного double массива: " << Avg(d_arr_2, ROWS, COLS) << endl;
 	cout << "Минимальное значение элементов двумерного double массива: " << minValueIn(d_arr_2, ROWS, COLS) << endl;
 	cout << "Максимальное значение элементов двумерного double массива: " << maxValueIn(d_arr_2, ROWS, COLS) << endl;
 	cout << "На сколько элементов сдвинуть влево массив:"; cin >> number_of_shifts;
 	shiftleft(d_arr_2, ROWS, COLS, number_of_shifts);
-	Print(d_arr_2, ROWS, COLS);
 	cout << "На сколько элементов сдвинуть вправо массив:"; cin >> number_of_shifts;
 	shiftRight(d_arr_2, ROWS, COLS, number_of_shifts);
-	Print(d_arr_2, ROWS, COLS);
 	cout << "Сортировка массива по возрастанию:" << endl;
 	Sort(d_arr_2, ROWS, COLS);
-	Print(d_arr_2, ROWS, COLS);
 	cout << "Двумерный массив типа DOUBLE заполненный уникальными случайными числами::" << endl;
 	Unique(d_arr_2, ROWS, COLS);
-	Print(d_arr_2, ROWS, COLS);
 	cout << delimiter << endl;
 
 	cout << " Двумерный CHAR массив " << ROWS << " на " << COLS << " элементов" << endl;
 	// Вывод двумерного (doble) массива на экран :
 	FillRand(c_arr_2, ROWS, COLS);
-	Print(c_arr_2, ROWS, COLS);
 	cout << "Сумма элементов двумерного char массива: " << Sum(c_arr_2, ROWS, COLS) << endl;
 	cout << "Среднее-арифметическое элементов двумерного char массива: " << Avg(c_arr_2, ROWS, COLS) << endl;
 	cout << "Минимальное значение элементов двумерного char массива: " << minValueIn(c_arr_2, ROWS, COLS) << endl;
 	cout << "Максимальное значение элементов двумерного char массива: " << maxValueIn(c_arr_2, ROWS, COLS) << endl;
 	cout << "На сколько элементов сдвинуть влево массив:"; cin >> number_of_shifts;
 	shiftleft(c_arr_2, ROWS, COLS, number_of_shifts);
-	Print(c_arr_2, ROWS, COLS);
 	cout << "На сколько элементов сдвинуть вправо массив:"; cin >> number_of_shifts;
 	shiftRight(c_arr_2, ROWS, COLS, number_of_shifts);
-	Print(c_arr_2, ROWS, COLS);
 	cout << "Сортировка массива по возрастанию :" << endl;
 	Sort(c_arr_2, ROWS, COLS);
-	Print(c_arr_2, ROWS, COLS);
 	cout << "Двумерный массив типа CHAR заполненный уникальными случайными числами:" << endl;
 	Unique(c_arr_2, ROWS, COLS);
-	Print(c_arr_2, ROWS, COLS);
 	cout << delimiter << endl;
 
 }
@@ -324,8 +295,8 @@ void FillRand(char arr[ROWS][COLS], const int ROWS, const int COLS, int minRand,
 		}
 	}
 }
-
-void Print(const int i_arr[], const int n)
+template<typename T>
+void Print(const T i_arr[], const int n)
 {
 	for (int i = 0; i < n; i++)
 	{
@@ -333,153 +304,20 @@ void Print(const int i_arr[], const int n)
 	}
 	cout << endl;
 }
-void Print(const double i_arr[], const int n)
+template<typename T>
+T Sum(const T i_arr[], const int n)
 {
-	for (int i = 0; i < n; i++)
-	{
-		cout << i_arr[i] << tab;
-	}
-	cout << endl;
-}
-void Print(const char i_arr[], const int n)
-{
-	for (int i = 0; i < n; i++)
-	{
-		cout << i_arr[i] << tab;
-	}
-	cout << endl;
-}
-void Print(const int arr[ROWS][COLS], const int ROWS, const int COLS)
-{
-	for (int i = 0; i < ROWS; i++)
-	{
-		for (int j = 0; j < COLS; j++)
-		{
-			cout << arr[i][j] << tab;
-		}
-		cout << endl;
-	}
-
-}
-void Print(const double d_arr_2[ROWS][COLS], const int ROWS, const int COLS)
-{
-	for (int i = 0; i < ROWS; i++)
-	{
-		for (int j = 0; j < COLS; j++)
-		{
-			cout << d_arr_2[i][j] << tab;
-		}
-		cout << endl;
-	}
-}
-void Print(const char arr[ROWS][COLS], const int ROWS, const int COLS)
-{
-	for (int i = 0; i < ROWS; i++)
-	{
-		for (int j = 0; j < COLS; j++)
-		{
-			cout << arr[i][j] << tab;
-		}
-		cout << endl;
-	}
-
-}
-
-int Sum(const int i_arr[], const int n)
-{
-	int sum = 0;
+	T sum = 0;
 	for (int i = 0; i < n; i++)
 	{
 		sum += i_arr[i];
 	}
 	return sum;
 }
-double Sum(const double i_arr[], const int n)
-{
-	double sum = 0;
-	for (int i = 0; i < n; i++)
-	{
-		sum += i_arr[i];
-	}
-	sum = sum * 100;
-	sum = double(sum) / 100;
-	return sum;
-
-}
-int Sum(const char i_arr[], const int n)
-{
-	int sum = 0;
-	for (int i = 0; i < n; i++)
-	{
-		sum += i_arr[i];
-	}
-	return sum;
-}
-int Sum(const int arr[ROWS][COLS], const int ROWS, const int COLS)
-{
-	int sum = 0;
-	for (int i = 0; i < ROWS; i++)
-	{
-		for (int j = 0; j < COLS; j++)
-		{
-			sum += arr[i][j];
-		}
-	}
-	return sum;
-
-}
-double Sum(const double d_arr_2[ROWS][COLS], const int ROWS, const int COLS)
-{
-	double sum = 0.0;
-	for (int i = 0; i < ROWS; i++)
-	{
-		for (int j = 0; j < COLS; j++)
-		{
-			sum += d_arr_2[i][j];
-		}
-		sum *= 100;
-		sum = (double)sum * 0.01;
-	}
-	return sum;
-
-}
-int Sum(const char arr[ROWS][COLS], const int ROWS, const int COLS)
-{
-	int sum = 0;
-	for (int i = 0; i < ROWS; i++)
-	{
-		for (int j = 0; j < COLS; j++)
-		{
-			sum += arr[i][j];
-		}
-	}
-	return sum;
-
-}
-
+//template<typename T>
 double Avg(const int i_arr[], const int n)
 {
 	return (double)Sum(i_arr, n) / n;
-}
-double Avg(const double i_arr[], const int n)
-{
-	return (double)Sum(i_arr, n) / n;
-}
-double Avg(const char i_arr[], const int n)
-{
-	return (double)Sum(i_arr, n) / n;
-}
-double Avg(const int arr[ROWS][COLS], const int ROWS, const int COLS)
-{
-	return (double)Sum(arr, ROWS, COLS) / (ROWS * COLS);
-}
-double Avg(const double arr[ROWS][COLS], const int ROWS, const int COLS)
-{
-	return (double)Sum(arr, ROWS, COLS) / (ROWS * COLS);
-}
-double Avg(const char arr[ROWS][COLS], const int ROWS, const int COLS)
-{
-	return (double)Sum(arr, ROWS, COLS) / (ROWS * COLS);
 }
 int minValueIn(const int i_arr[], const int n)
 {
