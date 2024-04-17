@@ -4,9 +4,6 @@ using namespace std;
 
 #define tab "\t"
 #define delimiter "\n---------------------------------------\n"
-#define INT
-#define DOUBLE
-#define CHAR
 
 const int ROWS = 3; // количество строк
 const int COLS = 4; // количество элементов строки
@@ -74,6 +71,12 @@ void Sort(int arr[ROWS][COLS], const int ROWS, const int COLS);
 void Sort(double arr[ROWS][COLS], const int ROWS, const int COLS);
 void Sort(char arr[ROWS][COLS], const int ROWS, const int COLS);
 
+void Search(int arr[], const int n);
+
+#define INT
+#define DOUBLE
+#define CHAR
+
 void main()
 {
 	setlocale(LC_ALL, "");
@@ -87,7 +90,7 @@ void main()
 
 	} while (minRand == maxRand);*/
 #ifdef INT
-	const int I_SIZE = 5;
+	const int I_SIZE = 10;
 	int arr[I_SIZE];
 	cout << " Массив типа INT в " << I_SIZE << " элементов" << endl;
 	FillRand(arr, I_SIZE);
@@ -105,7 +108,9 @@ void main()
 	cout << "Сортировка массива по возрастанию:" << endl;
 	Sort(arr, I_SIZE);
 	Print(arr, I_SIZE);
-	cout << endl;
+	cout << "Массив:" << endl;
+	Search(arr, I_SIZE);
+	//Print(arr,I_SIZE);
 	cout << endl;
 	cout << delimiter << endl;
 #endif //INT
@@ -898,5 +903,29 @@ void Sort(char arr[ROWS][COLS], const int ROWS, const int COLS)
 				}
 			}
 		}
+	}
+}
+
+void Search(int arr[], const int n)
+{
+	int coincidence = 0;
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < n; j++)
+		{
+			if (arr[i] == arr[j])
+			{
+				coincidence++;
+				//cout << "массив " << arr[i] << "повторяется " << coincidence << " раз" << endl;
+			}
+		}
+	}
+	if (coincidence < 1)
+	{
+		cout << "повторений нет";
+	}
+	else
+	{
+		cout << "повторений " << coincidence - 1;
 	}
 }
