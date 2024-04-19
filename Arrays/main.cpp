@@ -56,8 +56,8 @@ void main()
 	Print(i_arr, I_SIZE);
 	cout << "Массив типа INT заполненный уникальными случайными числами:" << endl;
 	Unique(i_arr, I_SIZE);
-	Print(i_arr, I_SIZE);*/
-	cout << endl;
+	Print(i_arr, I_SIZE);
+	cout << endl;*/
 	cout << delimiter << endl;
 #endif //INT
 #ifdef DOUBLE
